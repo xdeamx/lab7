@@ -15,6 +15,8 @@ package com.losalpes.servicios;
 import com.losalpes.entities.Vendedor;
 import com.losalpes.excepciones.OperacionInvalidaException;
 import java.util.List;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 
@@ -23,6 +25,7 @@ import javax.ejb.Stateful;
  * @author Juan Sebastián Urrego
  */
 @Stateful
+@DeclareRoles({"adminregional","gerenteregional"})
 public class ServicioVendedoresMock implements IServicioVendedoresMockRemote, IServicioVendedoresMockLocal {
 
     //-----------------------------------------------------------
@@ -56,6 +59,7 @@ public class ServicioVendedoresMock implements IServicioVendedoresMockRemote, IS
      * @throws OperacionInvalidaException Excepción lanzada en caso de error
      */
     @Override
+    @RolesAllowed({"adminregional","gerenteregional"})
     public void agregarVendedor(Vendedor vendedor) throws OperacionInvalidaException
     {
         try
@@ -74,6 +78,7 @@ public class ServicioVendedoresMock implements IServicioVendedoresMockRemote, IS
      * @throws OperacionInvalidaException Excepción lanzada en caso de error
      */
     @Override
+    @RolesAllowed({"adminregional","gerenteregional"})
     public void eliminarVendedor(long id) throws OperacionInvalidaException
     {
         Vendedor v=(Vendedor) persistencia.findById(Vendedor.class, id);
@@ -91,6 +96,7 @@ public class ServicioVendedoresMock implements IServicioVendedoresMockRemote, IS
      * @return vendedores Vendedores del sistema
      */
     @Override
+    @RolesAllowed({"adminregional","gerenteregional"})
     public List<Vendedor> getVendedores()
     {
         return persistencia.findAll(Vendedor.class);
